@@ -1,6 +1,6 @@
 MODULE params_model
 
-USE common, ONLY: r_size, slen
+USE common, ONLY: r_size, slen, slen_short
 
 IMPLICIT NONE
 
@@ -73,46 +73,48 @@ PUBLIC
 
   CHARACTER(14) :: SSHclm_file = 'aEtaCds9399.nc'
 
-  CHARACTER(256) :: gridfile  = 'MOM.res.nc'
-  CHARACTER(256) :: gridfile1 = 'MOM.res_1.nc'
-  CHARACTER(256) :: gridfile2 = 'ocean_topog.nc'
-  CHARACTER(256) :: gridfile3 = 'ocean_hgrid.nc'
+  CHARACTER(slen) :: gridfile  = 'MOM.res.nc'
+  CHARACTER(slen) :: gridfile1 = 'MOM.res_1.nc'
+  CHARACTER(slen) :: gridfile2 = 'ocean_topog.nc'
+  CHARACTER(slen) :: gridfile3 = 'ocean_hgrid.nc'
 
   ! variable names in gridfile:
-  CHARACTER(20) :: grid_nlon_name = 'grid_x_T'      ! (MOM6) used for dynamic allocation of grid
-  CHARACTER(20) :: grid_nlat_name = 'grid_x_T'      ! (MOM6) 
-  CHARACTER(20) :: grid_nlev_name = 'zt'            ! (MOM6) 
-  CHARACTER(20) :: grid_lon_name = 'lonh'
-  CHARACTER(20) :: grid_lat_name = 'lath'
-  CHARACTER(20) :: grid_lev_name = 'Layer'
-  CHARACTER(20) :: grid_temp_name = 'Temp'
-  CHARACTER(20) :: grid_salt_name = 'Salt'
-  CHARACTER(20) :: grid_u_name = 'u'
-  CHARACTER(20) :: grid_v_name = 'v'
-  CHARACTER(20) :: grid_h_name = 'h'
+  CHARACTER(slen_short) :: grid_nlon_name = 'grid_x_T'      ! (MOM6) used for dynamic allocation of grid
+  CHARACTER(slen_short) :: grid_nlat_name = 'grid_x_T'      ! (MOM6) 
+  CHARACTER(slen_short) :: grid_nlev_name = 'zt'            ! (MOM6) 
+  CHARACTER(slen_short) :: grid_lon_name = 'lonh'
+  CHARACTER(slen_short) :: grid_lat_name = 'lath'
+  CHARACTER(slen_short) :: grid_lev_name = 'Layer'
+  CHARACTER(slen_short) :: grid_temp_name = 'Temp'
+  CHARACTER(slen_short) :: grid_salt_name = 'Salt'
+  CHARACTER(slen_short) :: grid_u_name = 'u'
+  CHARACTER(slen_short) :: grid_v_name = 'v'
+  CHARACTER(slen_short) :: grid_h_name = 'h'
 
-  CHARACTER(20) :: grid_lon2d_name = 'x'
-  CHARACTER(20) :: grid_lat2d_name = 'y'
+  CHARACTER(slen_short) :: grid_lon2d_name = 'x'
+  CHARACTER(slen_short) :: grid_lat2d_name = 'y'
 
-  CHARACTER(20) :: grid_wet_name = 'wet'
-  CHARACTER(20) :: grid_depth_name = 'depth'
-  CHARACTER(20) :: grid_height_name = 'col_height'
+  CHARACTER(slen_short) :: grid_wet_name = 'wet'
+  CHARACTER(slen_short) :: grid_depth_name = 'depth'
+  CHARACTER(slen_short) :: grid_height_name = 'col_height'
  
   ! Diagnostic file filenames !STEVE: these aren't used, instead files are specified explicitly by obsop_xxx.f90 routine
-  CHARACTER(11) :: diag_tsbase = 'MOM.diag.nc'   !(and u, and h)
-  CHARACTER(11) :: diag_uvbase = 'MOM.diag.nc'  !(v and ave_ssh/sfc)
+  CHARACTER(slen) :: diag_tsbase = 'MOM.diag.nc'   !(and u, and h)
+  CHARACTER(slen) :: diag_uvbase = 'MOM.diag.nc'  !(v and ave_ssh/sfc)
   CHARACTER(slen) :: diag_hbase
   ! variable names in diag file:
-  CHARACTER(2) :: diag_lon_name = 'xh'
-  CHARACTER(2) :: diag_lat_name = 'yh'
-  CHARACTER(2) :: diag_lev_name = 'zl'
-  CHARACTER(4) :: diag_temp_name = 'temp'
-  CHARACTER(4) :: diag_salt_name = 'salt'
-  CHARACTER(1) :: diag_u_name = 'u'
-  CHARACTER(1) :: diag_v_name = 'v'
-  CHARACTER(1) :: diag_h_name = 'h'
-  CHARACTER(3) :: diag_ssh_name = 'ssh'
-  CHARACTER(10):: diag_height_name = 'col_height'
+  CHARACTER(slen_short) :: diag_lon_name = 'xh'
+  CHARACTER(slen_short) :: diag_lat_name = 'yh'
+  CHARACTER(slen_short) :: diag_lev_name = 'zl'
+  CHARACTER(slen_short) :: diag_temp_name = 'temp'
+  CHARACTER(slen_short) :: diag_salt_name = 'salt'
+  CHARACTER(slen_short) :: diag_u_name = 'u'
+  CHARACTER(slen_short) :: diag_v_name = 'v'
+  CHARACTER(slen_short) :: diag_h_name = 'h'
+  CHARACTER(slen_short) :: diag_ssh_name = 'ssh'
+  CHARACTER(slen_short) :: diag_sst_name = 'sst'
+  CHARACTER(slen_short) :: diag_sss_name = 'sss'
+  CHARACTER(slen_short) :: diag_height_name = 'col_height'
 
   !STEVE: flags to specify whether to read in each variable
   !       only the observed variables are needed from the diag file
@@ -121,6 +123,8 @@ PUBLIC
   LOGICAL :: diag_DO_u    = .false.
   LOGICAL :: diag_DO_v    = .false.
   LOGICAL :: diag_DO_ssh  = .true.
+  LOGICAL :: diag_DO_sst  = .true.
+  LOGICAL :: diag_DO_sss  = .true.
 
   ! Restart filenames
   CHARACTER(10) :: rsrt_tsbase = 'MOM.res.nc'   !(and u, and h)
